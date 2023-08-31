@@ -51,7 +51,7 @@ export default function Dashboard() {
     return (
         <>
             <TableContainer style={{ padding: '60px 10px' }}>
-                <Table aria-label="simple table">
+                <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell style={{ textAlign: 'center' }}>id</TableCell>
