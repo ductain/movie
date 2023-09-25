@@ -1,7 +1,11 @@
+@import '../../app.scss';
 .watch-responsive {
     width: 100vw;
     height: 100vh;
     margin-top: 60px;
+    @include tablet{
+        height: 90vh;
+    }
     iframe {
         width: 100%;
         height: 100%;
