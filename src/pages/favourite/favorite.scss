@@ -1,0 +1,18 @@
+// Your existing SCSS code for navbar styling
+
+.favorites-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // Ensure the container takes at least the full height of the viewport
+  background-color: var(--main-color);
+
+  .favorites-content {
+    flex-grow: 1; // Allow the content to grow and fill the available space
+    padding-top: 20px; // Add padding or styling to your content as needed
+
+    // Add responsive styles as needed
+    @media screen and (max-width: 1000px) {
+      /* Styles for screens smaller than 1000px */
+    }
+  }
+}

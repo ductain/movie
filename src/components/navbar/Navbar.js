@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import Button from "@mui/material/Button";
 const Navbar = () => {
+
   const { user, logOut, googleSignIn } = UserAuth();
   const handleGoogleSignIn = async () => {
     try {
@@ -41,7 +42,13 @@ const Navbar = () => {
             style={{ textDecoration: "none", color: "white" }}
           >
             <span>About</span>
-          </Link>
+          </Link>  
+          <Link
+            to={"/favorites"}
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <span>Favorites</span>
+          </Link> 
         </div>
         <div className="right">
           {user?.displayName ? (

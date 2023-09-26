@@ -3,6 +3,9 @@ import './detail.scss'
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 export default function Detail() {
   const { id } = useParams()
   const [content, setContent] = useState({
@@ -10,7 +13,9 @@ export default function Detail() {
     title: '',
     year: 0,
     detail: '',
+    status: 0, // Add a status property to store the status of the movie
   })
+
   useEffect(() => {
     try {
       const loadMovie = async () => {
@@ -21,25 +26,53 @@ export default function Detail() {
     } catch (error) {
       console.log(error)
     }
-  }, [])
-  console.log(content.title)
+  }, [id]) // Include 'id' as a dependency so the effect runs when the 'id' changes
+
+  const handleToggleStatus = async () => {
+    try {
+      // Toggle the status (0 to 1 or 1 to 0)
+      const newStatus = content.status === 0 ? 1 : 0;
+
+      // Send a PUT request to update the movie's status
+      await axios.put(`https://64914d492f2c7ee6c2c7f847.mockapi.io/api/v1/Movies/${id}`, {
+        status: newStatus,
+      });
+
+      // Update the 'content' state with the updated status
+      setContent((prevContent) => ({
+        ...prevContent,
+        status: newStatus,
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className='detail'>
       <div className="left">
         <img src={content.img} alt="" />
-        <Link to={`/watch/${content.id}`} style={{color: 'black'}}>
+        <Link to={`/watch/${content.id}`} style={{ color: 'black' }}>
           <div className="button">
             <PlayCircleIcon className='icon' />
             <span>WATCH MOVIE</span>
           </div>
         </Link>
+        {/* Button to toggle the status */}
+
       </div>
       <div className="right">
         <h4>{content.title}</h4>
         <span>{content.year}</span>
-        <p>
-          {content.detail}
-        </p>
+        <p>{content.detail}</p>
+        <button onClick={handleToggleStatus} className="circle-button">
+          {content.status === 0 ? (
+            <FavoriteIcon style={{ fontSize: 30, color: 'gray' }} />
+          ) : (
+            <FavoriteIcon  style={{ fontSize: 30, color: 'red' }} />
+          )}
+        </button>
+
       </div>
     </div>
   )
