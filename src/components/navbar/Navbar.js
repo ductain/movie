@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import Button from "@mui/material/Button";
+import logo from "../../assets//logo1-removebg-preview-2.png";
+
 const Navbar = () => {
   const { user, logOut, googleSignIn } = UserAuth();
   const handleGoogleSignIn = async () => {
@@ -29,10 +31,14 @@ const Navbar = () => {
     <div className={isScrolled ? "navbar scrolled" : "navbar"}>
       <div className="container">
         <div className="left">
-          <img
+          {/* <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
             alt=""
-          />
+          /> */}
+
+          <Link to={"/"} >
+            <img src={logo} alt="Logo" />
+          </Link>
           <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
             <span>Homepage</span>
           </Link>

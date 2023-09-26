@@ -4,10 +4,12 @@
   font-size: 14px;
   position: fixed;
   top: 0;
+  height: 80px;
   width: 100%;
   z-index: 999;
-  background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%);
+  background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 40%);
   &.scrolled {
+    transition: background-color 0.2s ease-in-out 0.3s;
     background-color: var(--main-color);
   }
   .container {
@@ -15,23 +17,24 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 70px;
-    @include mobile{
+    height: auto;
+    @include tablet{
       padding: 0 25px;
     }
     .left {
       display: flex;
       align-items: center;
       img {
-        height: 25px;
-        margin-right: 40px;
+        height: 60px;
+        margin: 10px 20px;
         @include mobile{
           display: none;
         }
       }
       span {
-        margin-right: 20px;
+        margin: 20px;
         cursor: pointer;
+        text-align: center;
       }
       .searchContainer{
         display: flex;
@@ -61,8 +64,16 @@
         border-radius: 50%;
         object-fit: cover;
         margin-right: 10px;
+       
+      }
+      span {
+        @include tablet{
+          display: none;
+        }
+        
       }
       .profile {
+        
         .options {
           display: none;
           background-color: var(--main-color);
@@ -72,13 +83,14 @@
           padding: 10px;
           cursor: pointer;
         }
-        &:hover {
+       
+        } &:hover {
           .options {
             display: flex;
             flex-direction: column;
             position: absolute;
+            
           }
-        }
       }
     }
   }

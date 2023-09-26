@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import { Icon, IconButton } from "@mui/material";
 import "./search.scss";
 import { Link } from "react-router-dom";
 export default function Search({ setSearchValue, movies }) {
@@ -22,7 +23,7 @@ export default function Search({ setSearchValue, movies }) {
   const handleEnter = (e) => {
     if (e.keyCode === 13) {
       setSearchValue(input);
-      setNewFilter([])
+      setNewFilter([]);
     }
   };
   return (
@@ -35,7 +36,7 @@ export default function Search({ setSearchValue, movies }) {
           onChange={handleChange}
           onKeyDown={handleEnter}
         />
-        <SearchIcon style={{ color: "white" }} />
+          <SearchIcon style={{ color: "white" }} />
       </div>
       {newFilter.length !== 0 && (
         <div className="searchData">
