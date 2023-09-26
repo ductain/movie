@@ -4,7 +4,7 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Rating from '@mui/material/Rating';
 
 export default function Detail() {
   const { id } = useParams()
@@ -13,7 +13,8 @@ export default function Detail() {
     title: '',
     year: 0,
     detail: '',
-    status: 0, // Add a status property to store the status of the movie
+    status: 0,
+    rating: 0,
   })
 
   useEffect(() => {
@@ -47,13 +48,12 @@ export default function Detail() {
       console.log(error);
     }
   };
-
   return (
     <div className='detail'>
       <div className="left">
         <img src={content.img} alt="" />
         <Link to={`/watch/${content.id}`} style={{ color: 'black' }}>
-          <div className="button">
+          <div className="watchButton">
             <PlayCircleIcon className='icon' />
             <span>WATCH MOVIE</span>
           </div>
@@ -63,14 +63,17 @@ export default function Detail() {
       </div>
       <div className="right">
         <h4>{content.title}</h4>
-        <span>{content.year}</span>
+        <span>Publish Year: {content.year}</span>
+        <span>Gerne: {content.gerne}</span>
+        <Rating name='read-only' value={content.rating} style={{display: 'flex'}} readOnly />
         <p>{content.detail}</p>
-        <button onClick={handleToggleStatus} className="circle-button">
+        <button onClick={handleToggleStatus} className='favorButton'>
           {content.status === 0 ? (
-            <FavoriteIcon style={{ fontSize: 30, color: 'gray' }} />
+            <FavoriteIcon style={{ fontSize: 40, color: 'gray' }} />
           ) : (
-            <FavoriteIcon  style={{ fontSize: 30, color: 'red' }} />
+            <FavoriteIcon  style={{ fontSize: 40, color: 'red' }} />
           )}
+          <span>ADD TO FAVOR</span>
         </button>
 
       </div>
