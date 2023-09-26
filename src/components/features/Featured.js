@@ -23,7 +23,7 @@ export default function Featured() {
   }, []);
   return (
     <div className="featured">
-      <img src={movie.img} alt="" />
+      <img src={movie.img} alt="featured movie" />
       <div className="info">
         <h1>{movie.title}</h1>
         <span>{movie.year}</span>
