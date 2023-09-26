@@ -1,4 +1,5 @@
 @import '../../app.scss';
+
 .navbar {
   color: white;
   font-size: 14px;
@@ -7,33 +8,41 @@
   width: 100%;
   z-index: 999;
   background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%);
+
   &.scrolled {
     background-color: var(--main-color);
   }
+
   .container {
     padding: 0 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 70px;
-    @include mobile{
+
+    @include mobile {
       padding: 0 25px;
     }
+
     .left {
       display: flex;
       align-items: center;
+
       img {
-        height: 25px;
+        height: 50px;
         margin-right: 40px;
-        @include mobile{
+
+        @include mobile {
           display: none;
         }
       }
+
       span {
         margin-right: 20px;
         cursor: pointer;
       }
-      .searchContainer{
+
+      .searchContainer {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -41,20 +50,23 @@
         padding: 5px;
         width: 500px;
 
-        input{
+        input {
           border: none;
           flex: 3;
           padding: 5px;
         }
       }
     }
+
     .right {
       display: flex;
       align-items: center;
+
       .icon {
         margin: 0 10px;
         cursor: pointer;
       }
+
       img {
         width: 30px;
         height: 30px;
@@ -62,16 +74,33 @@
         object-fit: cover;
         margin-right: 10px;
       }
+
+      span{
+        @include tablet {
+          display: none;
+        }
+      }
+
+      // &:hover {
+        .options {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+        }
+      // }
+
       .profile {
         .options {
           display: none;
           background-color: var(--main-color);
           border-radius: 5px;
         }
+
         span {
           padding: 10px;
           cursor: pointer;
         }
+
         &:hover {
           .options {
             display: flex;
@@ -82,4 +111,5 @@
       }
     }
   }
+  
 }

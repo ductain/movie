@@ -23,9 +23,14 @@ const Home = () => {
   }, []);
   return (
     <div className="home">
-      <Featured />
-      <Search setSearchValue={setSearchValue} movies={movies} />
-      <List movies={movies} search={searchValue} />
+      <div className="feature">
+        <Featured />
+        {/* <span>sadasdasdsad</span> */}
+      </div>
+      <div className="container">
+        <Search setSearchValue={setSearchValue} movies={movies} />
+        <List movies={movies} search={searchValue} />
+      </div>
     </div>
   );
 };
