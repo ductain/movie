@@ -1,10 +1,13 @@
 import "./navbar.scss";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import Button from "@mui/material/Button";
-import logo from "../../assets//logo1-removebg-preview-2.png";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import logo from "../../assets/logo1-removebg-preview-2.png";
 
 const Navbar = () => {
   const { user, logOut, googleSignIn } = UserAuth();
@@ -15,11 +18,15 @@ const Navbar = () => {
       console.log(error);
     }
   };
+
   const [isScrolled, setIsScrolled] = useState(false);
   window.onscroll = () => {
     setIsScrolled(window.scrollY === 0 ? false : true);
-    return () => (window.onscroll = null);
+    return () => {
+      window.onscroll = null;
+    };
   };
+
   const handleSignOut = async () => {
     try {
       await logOut();
@@ -27,16 +34,22 @@ const Navbar = () => {
       console.log(error);
     }
   };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div className={isScrolled ? "navbar scrolled" : "navbar"}>
       <div className="container">
         <div className="left">
-          {/* <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
-            alt=""
-          /> */}
-
-          <Link to={"/"} >
+          <Link to={"/"}>
             <img src={logo} alt="Logo" />
           </Link>
           <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
@@ -52,21 +65,51 @@ const Navbar = () => {
         <div className="right">
           {user?.displayName ? (
             <>
-              <img src={user.photoURL} alt={user.email} />
+              {/* <img src={user.photoURL} alt={user.email} /> */}
               <span>{user.displayName}</span>
               <div className="profile">
-                <ArrowDropDownIcon className="icon" />
-                <div className="options">
-                  <span>
+                <IconButton
+                  className="icon"
+                  onClick={handleMenuOpen}
+                  aria-controls="user-menu"
+                  aria-haspopup="true"
+                  aria-expanded={Boolean(anchorEl)}
+                >
+                  <img src={user.photoURL} alt={user.email} />
+                </IconButton>
+                <Menu
+                  sx={{
+                    ".MuiMenu-paper": {
+                      backgroundColor: "var(--main-color)", // Set the menu background color to black
+                    },
+                    ".MuiMenuItem-root": {
+                      color: "white", // Set the menu item text color to white
+                    },
+                  }}
+                  // id="user-menu"
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleMenuClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  getContentAnchorEl={null}
+                >
+                  <MenuItem onClick={handleMenuClose}>
                     <Link
                       to={"/account"}
                       style={{ textDecoration: "none", color: "white" }}
                     >
                       Account
                     </Link>
-                  </span>
-                  <span onClick={handleSignOut}>Logout</span>
-                </div>
+                  </MenuItem>
+                  <MenuItem onClick={handleSignOut}>Logout</MenuItem>
+                </Menu>
               </div>
             </>
           ) : (
