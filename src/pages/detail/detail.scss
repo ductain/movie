@@ -81,5 +81,15 @@
                 font-size: 20px;
             }
         }
+        .circle-button {
+            background-color: transparent; /* Set the background color to transparent */
+            border: none; /* Remove the border */
+            border-radius: 50%; /* Create a circular shape */
+            cursor: pointer;
+            padding: 10px; /* Adjust padding as needed */
+          }
+          
+          
+          
     }
 }
