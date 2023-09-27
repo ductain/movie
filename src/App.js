@@ -10,6 +10,8 @@ import About from "./pages/about/About";
 import Watch from "./pages/watch/Watch";
 import Update from "./pages/update/Update";
 import Account from "./pages/account/Account";
+import Favorites from "./pages/favourite/favourite";
+
 const App = () => {
   return (
     <>
@@ -19,6 +21,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/watch/:id" element={<Watch />} />
         <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/favorites" element={<Favorites/>}/>
         <Route
           path="/admin"
           element={

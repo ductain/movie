@@ -10,6 +10,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import logo from "../../assets/logo1-removebg-preview-2.png";
 
 const Navbar = () => {
+
   const { user, logOut, googleSignIn } = UserAuth();
   const handleGoogleSignIn = async () => {
     try {
@@ -60,7 +61,13 @@ const Navbar = () => {
             style={{ textDecoration: "none", color: "white" }}
           >
             <span>About</span>
-          </Link>
+          </Link>  
+          <Link
+            to={"/favorites"}
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <span>Favorites</span>
+          </Link> 
         </div>
         <div className="right">
           {user?.displayName ? (
