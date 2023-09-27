@@ -6,7 +6,6 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import logo from "../../assets/logo1-removebg-preview-2.png";
 
 const Navbar = () => {
@@ -67,7 +66,13 @@ const Navbar = () => {
             style={{ textDecoration: "none", color: "white" }}
           >
             <span>Favorites</span>
-          </Link> 
+          </Link>
+          <Link
+            to={"/upcoming"}
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <span>Upcoming</span>
+          </Link>  
         </div>
         <div className="right">
           {user?.displayName ? (

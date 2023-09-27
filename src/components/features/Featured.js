@@ -11,7 +11,7 @@ export default function Featured() {
         "https://64914d492f2c7ee6c2c7f847.mockapi.io/api/v1/Movies"
       );
       const moviesData = res.data;
-      const sortedMoviesData = moviesData.sort((a, b) => b.year - a.year);
+      const sortedMoviesData = moviesData.sort((a, b) => b.date - a.date);
       const newestMovie = sortedMoviesData[0];
       setMovie(newestMovie);
     } catch (error) {

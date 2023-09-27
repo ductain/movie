@@ -11,10 +11,15 @@ const Home = () => {
   useEffect(() => {
     try {
       const getMovies = async () => {
+        const currentDate = new Date();
         const res = await axios.get(
           "https://64914d492f2c7ee6c2c7f847.mockapi.io/api/v1/Movies"
         );
-        setMovies(res.data);
+        // fetch all movie which date publish <= current date into homepage
+        const filteredMovies = res.data.filter(
+          (movie) => new Date(movie.date) <= currentDate
+        );
+        setMovies(filteredMovies);
       };
       getMovies();
     } catch (error) {

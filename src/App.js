@@ -11,16 +11,19 @@ import Watch from "./pages/watch/Watch";
 import Update from "./pages/update/Update";
 import Account from "./pages/account/Account";
 import Favorites from "./pages/favourite/favourite";
-
+import Upcoming from "./pages/upcoming/Upcoming";
+import UpcomingDetail from './pages/upcomingDetail/upcomingDetail'
 const App = () => {
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/upcoming" element={<Upcoming />} />
         <Route path="/about" element={<About />} />
         <Route path="/watch/:id" element={<Watch />} />
         <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/upcomingDetail/:id" element={<UpcomingDetail />} />
         <Route path="/favorites" element={<Favorites/>}/>
         <Route
           path="/admin"
