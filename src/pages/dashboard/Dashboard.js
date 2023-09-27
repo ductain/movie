@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import TablePagination from "@mui/material/TablePagination";
+import Rating from '@mui/material/Rating';
 import {
   Dialog,
   DialogActions,
@@ -90,6 +91,8 @@ export default function Dashboard() {
               <TableCell>Image</TableCell>
               <TableCell>Title</TableCell>
               <TableCell>Year</TableCell>
+              <TableCell>Gerne</TableCell>
+              <TableCell>Rating</TableCell>
               <TableCell>Clip</TableCell>
               <TableCell>Detail</TableCell>
               <TableCell style={{ textAlign: "center" }}>Action</TableCell>
@@ -112,6 +115,8 @@ export default function Dashboard() {
                 </TableCell>
                 <TableCell>{data.title}</TableCell>
                 <TableCell>{data.year}</TableCell>
+                <TableCell>{data.gerne}</TableCell>
+                <TableCell><Rating value={data.rating} readOnly size="small"/></TableCell>
                 <TableCell>{data.clip}</TableCell>
                 <TableCell>{data.detail}</TableCell>
                 <TableCell
@@ -119,7 +124,7 @@ export default function Dashboard() {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    padding: "35px",
+                    padding: "auto",
                     gap: "10px",
                   }}
                 >

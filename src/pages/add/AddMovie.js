@@ -10,6 +10,8 @@ import {
   Typography,
 } from "@mui/material";
 import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import Rating from '@mui/material/Rating';
 import axios from "axios";
 import { useFormik } from "formik";
 import React, { useState } from "react";
@@ -21,14 +23,35 @@ export default function AddMovie() {
   const handleClose = () => {
     setOpen(false);
   };
+  //gerne option value. You can add more option here
+  const options = [
+    {
+      value: "War",
+    },
+    {
+      value: "History",
+    },
+    {
+      value: "Animation",
+    },
+    {
+      value: "Action",
+    },
+    {
+      value: "Comedy",
+    },
+  ];
   const currentYear = new Date().getFullYear();
   const formik = useFormik({
     initialValues: {
       title: "",
       year: 0,
+      gerne: "",
+      rating: 0,
       img: "",
       clip: "",
       detail: "",
+      status: 0,
     },
     onSubmit: (values) => {
       try {
@@ -48,9 +71,10 @@ export default function AddMovie() {
         .typeError("Please type a number.")
         .min(1960, `Must be greater than or equal to 1960`)
         .max(currentYear, `Must be less than or equal to ${currentYear}`),
+      gerne: Yup.string().required("Required."), //require select gerne
       img: Yup.string()
-        .required("Image file is required")
-        .min(10, "Must be 2 characters or more"),
+        .required("Image URL is required")
+        .min(10, "Must be 10 characters or more"),
       clip: Yup.string()
         .required("Required.")
         .min(10, "Must be 10 characters or more"),
@@ -93,6 +117,31 @@ export default function AddMovie() {
           {formik.errors.year}
         </Typography>
       )}
+      {/*gerne select here*/}
+      <TextField
+        margin="dense"
+        name="gerne"
+        label="Select A Gerne"
+        select
+        fullWidth
+        variant="standard"
+        value={formik.values.gerne}
+        onChange={formik.handleChange}
+      >
+        {options.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.value}
+          </MenuItem>
+        ))}
+      </TextField>
+      {formik.errors.gerne && formik.touched.gerne && (
+        <Typography variant="caption" color="red">
+          {formik.errors.gerne}
+        </Typography>
+      )}
+      {/*Rating*/}
+      <Typography component="legend" variant="caption">Rating</Typography>
+      <Rating name="rating" value={formik.values.rating} onChange={formik.handleChange} size="large"/>
       <TextField
         margin="dense"
         name="img"

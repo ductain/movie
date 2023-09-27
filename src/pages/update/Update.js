@@ -4,13 +4,35 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { TextField, Button, Typography } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import Rating from "@mui/material/Rating";
 export default function Update() {
   let navigate = useNavigate();
   const { id } = useParams();
   const currentYear = new Date().getFullYear();
+  // gerne option value here. You can add more option
+  const options = [
+    {
+      value: "War",
+    },
+    {
+      value: "History",
+    },
+    {
+      value: "Animation",
+    },
+    {
+      value: "Action",
+    },
+    {
+      value: "Comedy",
+    },
+  ];
   const [movie, setMovie] = useState({
     title: "",
     year: 0,
+    gerne: "",
+    rating: 0,
     img: "",
     clip: "",
     detail: "",
@@ -33,20 +55,23 @@ export default function Update() {
     initialValues: {
       title: movie.title,
       year: movie.year,
+      gerne: movie.gerne,
+      rating: movie.rating,
       img: movie.img,
       clip: movie.clip,
       detail: movie.detail,
+      status: movie.status,
     },
-    onSubmit: async(values) => {
-        try {
-            await axios.put(
-              `https://64914d492f2c7ee6c2c7f847.mockapi.io/api/v1/Movies/${id}`,
-              values
-            );
-            navigate("/admin");
-          } catch (error) {
-            console.log(error);
-          }
+    onSubmit: async (values) => {
+      try {
+        await axios.put(
+          `https://64914d492f2c7ee6c2c7f847.mockapi.io/api/v1/Movies/${id}`,
+          values
+        );
+        navigate("/admin");
+      } catch (error) {
+        console.log(error);
+      }
     },
     validationSchema: Yup.object({
       title: Yup.string()
@@ -58,6 +83,7 @@ export default function Update() {
         .typeError("Please type a number.")
         .min(1960, `Must be greater than or equal to 1960`)
         .max(currentYear, `Must be less than or equal to ${currentYear}`),
+      gerne: Yup.string().required("Required"),
       img: Yup.string()
         .required("Required")
         .min(10, "Must be 10 characters or more"),
@@ -103,6 +129,34 @@ export default function Update() {
           {formik.errors.year}
         </Typography>
       )}
+      <TextField
+        margin="dense"
+        name="gerne"
+        label="Select A Gerne"
+        select
+        fullWidth
+        variant="standard"
+        value={formik.values.gerne}
+        onChange={formik.handleChange}
+      >
+        {options.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.value}
+          </MenuItem>
+        ))}
+      </TextField>
+      {formik.errors.gerne && formik.touched.gerne && (
+        <Typography variant="caption" color="red">
+          {formik.errors.gerne}
+        </Typography>
+      )}
+      <Typography component="legend" variant="caption">Rating</Typography>
+      <Rating
+        name="rating"
+        value={formik.values.rating}
+        onChange={formik.handleChange}
+        size="large"
+      />
       <TextField
         margin="dense"
         name="img"
