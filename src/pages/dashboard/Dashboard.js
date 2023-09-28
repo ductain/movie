@@ -19,6 +19,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 import Hidden from "@mui/material/Hidden"; // Import the Hidden component
 import "./Dashboard.scss";
 import { UserAuth } from "../../context/AuthContext";
@@ -136,12 +137,16 @@ export default function Dashboard() {
                     </Hidden>
                     <TableCell className="table-action">
                       <Link to={`/edit/${data.id}`}>
-                        <EditIcon color="primary" />
+                        <IconButton color="primary">
+                          <EditIcon />
+                        </IconButton>
                       </Link>
-                      <DeleteIcon
-                        onClick={() => handleDeleteDialogOpen(data.id)}
-                        className="delete-icon"
-                      />
+                      <IconButton>
+                        <DeleteIcon
+                          onClick={() => handleDeleteDialogOpen(data.id)}
+                          className="delete-icon"
+                        />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 ))}
