@@ -8,19 +8,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import Rating from "@mui/material/Rating";
 import { format } from "date-fns";
-import {
-  IconButton,
-  Typography,
-  Chip,
-  Box,
-  Grid,
-  Button,
-} from "@mui/material";
+import { IconButton, Typography, Chip, Box, Grid, Button } from "@mui/material";
 import CustomAlert from "../../components/snackbar/alert";
 import Tooltip from "@mui/material/Tooltip";
 import RandomMovieList from "./RandomMovieList";
-
-
 
 export default function Detail() {
   const { id } = useParams();
@@ -89,108 +80,104 @@ export default function Detail() {
   const publishDate = new Date(content.date);
 
   return (
-    <Grid container className="container-detail">
-      <Box className="bg-img">
-        <Grid
-          className="overlay"
-          container
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-        >
-          <Grid
-            item
-            xs={8}
-            sx={{ m: 1 }}
-            className="data-grid"
-          >
-            <div>
-              <Typography variant="h4">{content.title}</Typography>
+    // <Grid container className="container-detail">
+    <div className="bg-img">
+      {/* <img src={content.img} alt="" /> */}
+
+      <div className="detail-container">
+        {/* <div className="overlay1"> */}
+        <Box className="overlay1">
+          <Box className="detail" style={{ border: "2px solid #f5f5f5" }}>
+            <Box className="data-box"   style={{ border: "2px solid #f5f5f5" }}>
               <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  // border: "2px solid #f5f5f5",
-                }}
+                className="img-wrapper"
+                style={{ border: "2px solid #f5f5f5" }}
               >
-                <Typography
-                  variant="h6"
-                // sx={{ m: 1, color: "#53ca53", border: "2px solid #f5f5f5" }}
-                >
-                  Rating:
-                </Typography>
-                <Rating
-                  name="read-only"
-                  value={content.rating}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    color: "f5f5f5",
-                  }}
-                  readOnly
-                />
-                <Typography
-                  variant="h6"
-                // sx={{ m: 1, border: "2px solid #f5f5f5" }}
-                >
-                  Release Date: {format(publishDate, "dd/MM/yyyy")}
-                </Typography>
+                <img src={content.img} alt="movie poster" />
               </Box>
-              <Typography
-                variant="body1"
-              // sx={{ m: 1, border: "2px solid #f5f5f5" }}
+              <Box
+                sx={{ color: "white" }}
+                style={{ border: "2px solid #f5f5f5" }}
+                className="data-wrapper"
               >
-                Genre: <Chip label={content.gerne} color="error" />
-              </Typography>
+                <Typography variant="h4">{content.title}</Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    // border: "2px solid #f5f5f5",
+                  }}
+                >
+                  <Typography variant="h6">Rating:</Typography>
+                  <Rating name="read-only" value={content.rating} readOnly />
+                  <Typography variant="h6">
+                    Release Date: {format(publishDate, "dd/MM/yyyy")}
+                  </Typography>
+                </Box>
+                <Typography variant="body1">
+                  Genre: <Chip label={content.gerne} color="error" />
+                </Typography>
+                <Typography variant="body1">
+                  Description: {content.detail}
+                </Typography>
+                <Box
+                  sx={{
+                    float: "right",
+                    padding: "30px 0px",
+                  }}
+                >
+                  <Tooltip
+                    title={
+                      content.status === 0
+                        ? "Add to Favorites"
+                        : "Remove from Favorites"
+                    }
+                  >
+                    <Button
+                      onClick={handleToggleStatus}
+                      color="inherit"
+                      variant="outlined"
+                      size="large"
+                      sx={{ marginRight: "16px" }} // Add right margin to this button
+                    >
+                      {content.status === 0 ? (
+                        <FavoriteBorderIcon fontSize="medium" />
+                      ) : (
+                        <FavoriteIcon fontSize="medium" />
+                      )}
+                    </Button>
+                  </Tooltip>
+                  <Link to={`/watch/${content.id}`}>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      size="large"
+                      startIcon={<PlayArrowIcon />}
+                    >
+                      Watch
+                    </Button>
+                  </Link>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
 
-              <Typography
-                variant="body1"
-              // sx={{ m: 1, color: "#606060", border: "2px solid #f5f5f5" }}
-              >
-                Description: {content.detail}
-              </Typography>
+        <CustomAlert
+          open={snackbarOpen}
+          variant={snackbarVariant}
+          message={snackbarMessage}
+          handleClose={() => setSnackbarOpen(false)}
+        />
+        {/* </div> */}
 
-              <Tooltip
-                title={
-                  content.status === 0
-                    ? "Add to Favorites"
-                    : "Remove from Favorites"
-                }
-              >
-                <IconButton onClick={handleToggleStatus}>
-                  {content.status === 0 ? (
-                    <FavoriteBorderIcon fontSize="large" color="error" />
-                  ) : (
-                    <FavoriteIcon fontSize="large" color="error" />
-                  )}
-                </IconButton>
-              </Tooltip>
-              <Link
-                to={`/watch/${content.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <Button variant="contained" color="error" size="large">
-                  <PlayArrowIcon className="icon" />
-                </Button>
-              </Link>
-
-            </div>
-          </Grid>
-          <Grid item xs={3} sx={{ m: 1 }}>
-            <div className="img-wrapper" >
-              <img src={content.img} alt="movie poster" />
-            </div>
-          </Grid>
-        </Grid>
-
-      </Box>
-      <CustomAlert
-        open={snackbarOpen}
-        variant={snackbarVariant}
-        message={snackbarMessage}
-        handleClose={() => setSnackbarOpen(false)}
-      />
-      <div className="randomMovie">
-        <RandomMovieList />
+        <div className="overlay2">
+          <div className="randomMovie">
+            <RandomMovieList />
+          </div>
+        </div>
       </div>
-    </Grid>
+    </div>
+    // </Grid>
   );
 }
