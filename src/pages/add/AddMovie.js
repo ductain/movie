@@ -45,7 +45,7 @@ export default function AddMovie() {
   const formik = useFormik({
     initialValues: {
       title: "",
-      year: 0,
+      date: new Date(),
       gerne: "",
       rating: 0,
       img: "",
@@ -65,12 +65,11 @@ export default function AddMovie() {
       title: Yup.string()
         .required("Required.")
         .min(2, "Must be 2 characters or more"),
-      year: Yup.number()
-        .integer()
-        .required("Required.")
-        .typeError("Please type a number.")
-        .min(1960, `Must be greater than or equal to 1960`)
-        .max(currentYear, `Must be less than or equal to ${currentYear}`),
+      date: Yup.string()
+        
+        .required("Required."),
+        
+        
       gerne: Yup.string().required("Required."), //require select gerne
       img: Yup.string()
         .required("Image URL is required")
@@ -104,17 +103,17 @@ export default function AddMovie() {
       )}
       <TextField
         margin="dense"
-        name="year"
-        label="Year"
-        type="text"
+        name="date"
+        label="Date"
+        type="date"
         fullWidth
         variant="standard"
-        value={formik.values.year}
+        value={formik.values.date}
         onChange={formik.handleChange}
       />
-      {formik.errors.year && formik.touched.year && (
+      {formik.errors.date && formik.touched.date && (
         <Typography variant="caption" color="red">
-          {formik.errors.year}
+          {formik.errors.date}
         </Typography>
       )}
       {/*gerne select here*/}
