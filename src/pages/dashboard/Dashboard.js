@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import TablePagination from "@mui/material/TablePagination";
-import Rating from '@mui/material/Rating';
+import Rating from "@mui/material/Rating";
 import {
   Dialog,
   DialogActions,
@@ -19,12 +19,15 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Hidden from "@mui/material/Hidden"; // Import the Hidden component
+import "./Dashboard.scss"
 
 export default function Dashboard() {
   const [movie, setMovie] = useState([]);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleteMovieId, setDeleteMovieId] = useState("");
   const baseURL = "https://64914d492f2c7ee6c2c7f847.mockapi.io/api/v1/Movies";
+
   const loadMovies = async () => {
     try {
       const res = await axios.get(baseURL);
@@ -33,9 +36,11 @@ export default function Dashboard() {
       console.log(error);
     }
   };
+
   useEffect(() => {
     loadMovies();
   }, []);
+
   const deleteMovie = async (id) => {
     try {
       await axios.delete(
@@ -46,6 +51,7 @@ export default function Dashboard() {
       console.log(error);
     }
   };
+
   const handleDeleteDialogOpen = (id) => {
     setDeleteMovieId(id);
     setDeleteDialogOpen(true);
@@ -60,27 +66,27 @@ export default function Dashboard() {
     setDeleteDialogOpen(false);
   };
 
-  // Add state variables for current page and sliced movie data
   const [currentPage, setCurrentPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const indexOfLastItem = (currentPage + 1) * rowsPerPage;
   const indexOfFirstItem = currentPage * rowsPerPage;
   const currentMovie = movie.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Create function to handle page changes
   const handlePageChange = (e, newPage) => {
     setCurrentPage(newPage);
   };
+
   const handleChangeRowsPerPage = (e) => {
     setRowsPerPage(parseInt(e.target.value, 10));
     setCurrentPage(0);
   };
+
   return (
     <>
-      <TableContainer style={{ marginTop: "70px" }}>
+      <TableContainer className="table-container">
         <Link
           to={"/add"}
-          style={{ textDecoration: "none", marginLeft: "200px" }}
+          style={{ textDecoration: "none", marginLeft: "200px"}}
         >
           CREATE A MOVIE
         </Link>
@@ -90,11 +96,12 @@ export default function Dashboard() {
               <TableCell>id</TableCell>
               <TableCell>Image</TableCell>
               <TableCell>Title</TableCell>
-              <TableCell>Year</TableCell>
-              <TableCell>Gerne</TableCell>
-              <TableCell>Rating</TableCell>
-              <TableCell>Clip</TableCell>
-              <TableCell>Detail</TableCell>
+              <Hidden mdDown>
+                <TableCell>Year</TableCell>
+                <TableCell>Gerne</TableCell>
+                <TableCell>Rating</TableCell>
+                <TableCell>Clip</TableCell>
+              </Hidden>
               <TableCell style={{ textAlign: "center" }}>Action</TableCell>
             </TableRow>
           </TableHead>
@@ -106,6 +113,7 @@ export default function Dashboard() {
                   <img
                     src={data.img}
                     alt=""
+                    className="table-image"
                     style={{
                       width: "40px",
                       height: "40px",
@@ -114,26 +122,21 @@ export default function Dashboard() {
                   />
                 </TableCell>
                 <TableCell>{data.title}</TableCell>
-                <TableCell>{data.year}</TableCell>
-                <TableCell>{data.gerne}</TableCell>
-                <TableCell><Rating value={data.rating} readOnly size="small"/></TableCell>
-                <TableCell>{data.clip}</TableCell>
-                <TableCell>{data.detail}</TableCell>
-                <TableCell
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    padding: "auto",
-                    gap: "10px",
-                  }}
-                >
+                <Hidden mdDown>
+                  <TableCell>{data.year}</TableCell>
+                  <TableCell>{data.gerne}</TableCell>
+                  <TableCell>
+                    <Rating value={data.rating} readOnly size="small" />
+                  </TableCell>
+                  <TableCell>{data.clip}</TableCell>
+                </Hidden>
+                <TableCell className="table-action">
                   <Link to={`/edit/${data.id}`}>
                     <EditIcon color="primary" />
                   </Link>
                   <DeleteIcon
                     onClick={() => handleDeleteDialogOpen(data.id)}
-                    style={{ cursor: "pointer", color: "red" }}
+                    className="delete-icon"
                   />
                 </TableCell>
               </TableRow>
