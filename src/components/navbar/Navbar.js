@@ -52,27 +52,55 @@ const Navbar = () => {
           <Link to={"/"}>
             <img src={logo} alt="Logo" />
           </Link>
-          <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
+          <Link
+            to={"/"}
+            className="custom-link"
+            style={{
+              textDecoration: "none",
+              color: "white",
+              transition: "color 0.1s", // Add a smooth color transition
+            }}
+            onMouseEnter={(e) => (e.target.style.color = "red")}
+            onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
+          >
             <span>Homepage</span>
           </Link>
           <Link
             to={"/about"}
-            style={{ textDecoration: "none", color: "white" }}
+            style={{
+              textDecoration: "none",
+              color: "white",
+              transition: "color 0.1s", // Add a smooth color transition
+            }}
+            onMouseEnter={(e) => (e.target.style.color = "red")}
+            onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
           >
             <span>About</span>
-          </Link>  
+          </Link>
           <Link
             to={"/favorites"}
-            style={{ textDecoration: "none", color: "white" }}
+            style={{
+              textDecoration: "none",
+              color: "white",
+              transition: "color 0.1s", // Add a smooth color transition
+            }}
+            onMouseEnter={(e) => (e.target.style.color = "red")}
+            onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
           >
             <span>Favorites</span>
           </Link>
           <Link
             to={"/upcoming"}
-            style={{ textDecoration: "none", color: "white" }}
+            style={{
+              textDecoration: "none",
+              color: "white",
+              transition: "color 0.1s", // Add a smooth color transition
+            }}
+            onMouseEnter={(e) => (e.target.style.color = "red")}
+            onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
           >
             <span>Upcoming</span>
-          </Link>  
+          </Link>
         </div>
         <div className="right">
           {user?.displayName ? (
