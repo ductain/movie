@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import CustomAlert from "../../components/snackbar/alert";
 import Tooltip from "@mui/material/Tooltip";
+import { UserAuth } from "../../context/AuthContext";
 
 export default function Detail() {
   const { id } = useParams();
@@ -86,7 +87,7 @@ export default function Detail() {
   };
 
   const publishDate = new Date(content.date);
-
+  const { user } = UserAuth();
   return (
     <Grid container className="container">
       {/* Background container */}
@@ -245,22 +246,24 @@ export default function Detail() {
               >
                 Description: {content.detail}
               </Typography>
-
-              <Tooltip
-                title={
-                  content.status === 0
-                    ? "Add to Favorites"
-                    : "Remove from Favorites"
-                }
-              >
-                <IconButton onClick={handleToggleStatus}>
-                  {content.status === 0 ? (
-                    <FavoriteBorderIcon fontSize="large" color="error" />
-                  ) : (
-                    <FavoriteIcon fontSize="large" color="error" />
-                  )}
-                </IconButton>
-              </Tooltip>
+              {/*Hidden favorite button if not sign in*/}
+              {user && (
+                <Tooltip
+                  title={
+                    content.status === 0
+                      ? "Add to Favorites"
+                      : "Remove from Favorites"
+                  }
+                >
+                  <IconButton onClick={handleToggleStatus}>
+                    {content.status === 0 ? (
+                      <FavoriteBorderIcon fontSize="large" color="error" />
+                    ) : (
+                      <FavoriteIcon fontSize="large" color="error" />
+                    )}
+                  </IconButton>
+                </Tooltip>
+              )}
               <Link
                 to={`/watch/${content.id}`}
                 style={{ textDecoration: "none" }}

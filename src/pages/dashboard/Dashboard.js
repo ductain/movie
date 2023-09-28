@@ -20,9 +20,11 @@ import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Hidden from "@mui/material/Hidden"; // Import the Hidden component
-import "./Dashboard.scss"
+import "./Dashboard.scss";
+import { UserAuth } from "../../context/AuthContext";
 
 export default function Dashboard() {
+  const { user } = UserAuth();
   const [movie, setMovie] = useState([]);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deleteMovieId, setDeleteMovieId] = useState("");
@@ -83,89 +85,95 @@ export default function Dashboard() {
 
   return (
     <>
-      <TableContainer className="table-container">
-        <Link
-          to={"/add"}
-          style={{ textDecoration: "none", marginLeft: "200px"}}
-        >
-          CREATE A MOVIE
-        </Link>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>id</TableCell>
-              <TableCell>Image</TableCell>
-              <TableCell>Title</TableCell>
-              <Hidden mdDown>
-                <TableCell>Date</TableCell>
-                <TableCell>Gerne</TableCell>
-                <TableCell>Rating</TableCell>
-                <TableCell>Clip</TableCell>
-              </Hidden>
-              <TableCell style={{ textAlign: "center" }}>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {currentMovie.map((data) => (
-              <TableRow key={data.id}>
-                <TableCell>{data.id}</TableCell>
-                <TableCell>
-                  <img
-                    src={data.img}
-                    alt=""
-                    className="table-image"
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%",
-                    }}
-                  />
-                </TableCell>
-                <TableCell>{data.title}</TableCell>
-                <Hidden mdDown>
-                  <TableCell>{data.date}</TableCell>
-                  <TableCell>{data.gerne}</TableCell>
-                  <TableCell>
-                    <Rating value={data.rating} readOnly size="small" />
-                  </TableCell>
-                  <TableCell>{data.clip}</TableCell>
-                </Hidden>
-                <TableCell className="table-action">
-                  <Link to={`/edit/${data.id}`}>
-                    <EditIcon color="primary" />
-                  </Link>
-                  <DeleteIcon
-                    onClick={() => handleDeleteDialogOpen(data.id)}
-                    className="delete-icon"
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <TablePagination
-          component="div"
-          count={movie.length}
-          page={currentPage}
-          onPageChange={handlePageChange}
-          rowsPerPage={rowsPerPage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </TableContainer>
-      <Dialog open={deleteDialogOpen} onClose={handleDeleteDialogClose}>
-        <DialogTitle>Alert</DialogTitle>
-        <DialogContent>
-          <DialogContentText>Are you sure want to delete?</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDeleteMovie} color="error">
-            Yes
-          </Button>
-          <Button onClick={handleDeleteDialogClose} color="primary">
-            No
-          </Button>
-        </DialogActions>
-      </Dialog>
+      {user?.uid === "zSqtyhPsBuUPSCiCKVMDrBJgYhy2" && (
+        <>
+          <TableContainer className="table-container">
+            <Link
+              to={"/add"}
+              style={{ textDecoration: "none", marginLeft: "200px" }}
+            >
+              CREATE A MOVIE
+            </Link>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>id</TableCell>
+                  <TableCell>Image</TableCell>
+                  <TableCell>Title</TableCell>
+                  <Hidden mdDown>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Gerne</TableCell>
+                    <TableCell>Rating</TableCell>
+                    <TableCell>Clip</TableCell>
+                  </Hidden>
+                  <TableCell style={{ textAlign: "center" }}>Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {currentMovie.map((data) => (
+                  <TableRow key={data.id}>
+                    <TableCell>{data.id}</TableCell>
+                    <TableCell>
+                      <img
+                        src={data.img}
+                        alt=""
+                        className="table-image"
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    </TableCell>
+                    <TableCell>{data.title}</TableCell>
+                    <Hidden mdDown>
+                      <TableCell>{data.date}</TableCell>
+                      <TableCell>{data.gerne}</TableCell>
+                      <TableCell>
+                        <Rating value={data.rating} readOnly size="small" />
+                      </TableCell>
+                      <TableCell>{data.clip}</TableCell>
+                    </Hidden>
+                    <TableCell className="table-action">
+                      <Link to={`/edit/${data.id}`}>
+                        <EditIcon color="primary" />
+                      </Link>
+                      <DeleteIcon
+                        onClick={() => handleDeleteDialogOpen(data.id)}
+                        className="delete-icon"
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <TablePagination
+              component="div"
+              count={movie.length}
+              page={currentPage}
+              onPageChange={handlePageChange}
+              rowsPerPage={rowsPerPage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </TableContainer>
+          <Dialog open={deleteDialogOpen} onClose={handleDeleteDialogClose}>
+            <DialogTitle>Alert</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Are you sure want to delete?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleDeleteMovie} color="error">
+                Yes
+              </Button>
+              <Button onClick={handleDeleteDialogClose} color="primary">
+                No
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </>
+      )}
     </>
   );
 }

@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 export default function Featured() {
   const [movies, setMovies] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -56,7 +55,7 @@ export default function Featured() {
             <img src={movie.img} alt={`Featured movie ${index}`} />
             <div className="info">
               <h1>{movie.title}</h1>
-              <span>{movie.year}</span>
+              <span>{new Date(movie.date).getFullYear()}</span> {/*get year from date*/}
               <span className="desc">{movie.detail}</span>
               <div className="buttons">
                 <Link to={`/watch/${movie.id}`} style={{ textDecoration: "none" }}>
