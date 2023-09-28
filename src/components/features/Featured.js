@@ -3,50 +3,77 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 export default function Featured() {
-  const [movie, setMovie] = useState([]);
-  const getMovie = async () => {
+  const [movies, setMovies] = useState([]);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+  const fetchMovies = async () => {
     try {
-      const res = await axios.get(
+      const response = await axios.get(
         "https://64914d492f2c7ee6c2c7f847.mockapi.io/api/v1/Movies"
       );
-      const moviesData = res.data;
-      
-      // Get an array of movies for the current year
-      const currentYear = new Date().getFullYear();
-      const moviesForCurrentYear = moviesData.filter(movie => {
-        const movieYear = new Date(movie.year).getFullYear();
-        return movieYear === currentYear;
-      });
-      
-      // Get a random movie from the moviesForCurrentYear array
-      const randomIndex = Math.floor(Math.random() * moviesForCurrentYear.length);
-      const randomMovie = moviesForCurrentYear[randomIndex];
-      
-      setMovie(randomMovie);
+
+      if (response.status === 200) {
+        const moviesData = response.data;
+
+        if (moviesData.length > 0) {
+          setMovies(moviesData);
+        } else {
+          console.log("No movies found in the data.");
+        }
+      } else {
+        console.log("Failed to fetch data. Status code: " + response.status);
+      }
     } catch (error) {
-      console.log(error);
+      console.log("An error occurred while fetching data:", error);
     }
-    
   };
+
   useEffect(() => {
-    getMovie();
+    fetchMovies();
   }, []);
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    beforeChange: (current, next) => setCurrentSlideIndex(next),
+  };
+
   return (
     <div className="featured">
-      <img src={movie.img} alt="featured movie" />
-      <div className="info">
-        <h1>{movie.title}</h1>
-        <span>{movie.year}</span>
-        <span className="desc">{movie.detail}</span>
-        <div className="buttons">
-          <Link to={`/watch/${movie.id}`} style={{ textDecoration: "none" }}>
-            <button className="play">
-              <PlayArrowIcon />
-              <span>Play</span>
-            </button>
-          </Link>
-        </div>
+      <Slider {...sliderSettings}>
+        {movies.map((movie, index) => (
+          <div key={movie.id} className="featured">
+            <img src={movie.img} alt={`Featured movie ${index}`} />
+            <div className="info">
+              <h1>{movie.title}</h1>
+              <span>{movie.year}</span>
+              <span className="desc">{movie.detail}</span>
+              <div className="buttons">
+                <Link to={`/watch/${movie.id}`} style={{ textDecoration: "none" }}>
+                  <button className="play">
+                    <PlayArrowIcon />
+                    <span>Play</span>
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </Slider>
+      <div className="slider-index">
+        <span>
+          {currentSlideIndex + 1} / {movies.length}
+        </span>
       </div>
     </div>
   );

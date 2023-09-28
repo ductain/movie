@@ -30,7 +30,7 @@ export default function Update() {
   ];
   const [movie, setMovie] = useState({
     title: "",
-    year: 0,
+    date: new Date(),
     gerne: "",
     rating: 0,
     img: "",
@@ -54,7 +54,7 @@ export default function Update() {
     enableReinitialize: true,
     initialValues: {
       title: movie.title,
-      year: movie.year,
+      date: movie.date,
       gerne: movie.gerne,
       rating: movie.rating,
       img: movie.img,
@@ -77,12 +77,8 @@ export default function Update() {
       title: Yup.string()
         .required("Required")
         .min(2, "Must be 2 characters or more"),
-      year: Yup.number()
-        .integer()
-        .required("Required.")
-        .typeError("Please type a number.")
-        .min(1960, `Must be greater than or equal to 1960`)
-        .max(currentYear, `Must be less than or equal to ${currentYear}`),
+      date: Yup.string()
+        .required("Required."),
       gerne: Yup.string().required("Required"),
       img: Yup.string()
         .required("Required")
@@ -116,17 +112,17 @@ export default function Update() {
       )}
       <TextField
         margin="dense"
-        name="year"
-        label="Year"
-        type="text"
+        name="date"
+        label="Date"
+        type="date"
         fullWidth
         variant="standard"
-        value={formik.values.year}
+        value={formik.values.date}
         onChange={formik.handleChange}
       />
-      {formik.errors.year && (
+      {formik.errors.date && (
         <Typography variant="caption" color="red">
-          {formik.errors.year}
+          {formik.errors.date}
         </Typography>
       )}
       <TextField

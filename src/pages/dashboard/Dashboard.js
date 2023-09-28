@@ -97,7 +97,7 @@ export default function Dashboard() {
               <TableCell>Image</TableCell>
               <TableCell>Title</TableCell>
               <Hidden mdDown>
-                <TableCell>Year</TableCell>
+                <TableCell>Date</TableCell>
                 <TableCell>Gerne</TableCell>
                 <TableCell>Rating</TableCell>
                 <TableCell>Clip</TableCell>
@@ -123,7 +123,7 @@ export default function Dashboard() {
                 </TableCell>
                 <TableCell>{data.title}</TableCell>
                 <Hidden mdDown>
-                  <TableCell>{data.year}</TableCell>
+                  <TableCell>{data.date}</TableCell>
                   <TableCell>{data.gerne}</TableCell>
                   <TableCell>
                     <Rating value={data.rating} readOnly size="small" />

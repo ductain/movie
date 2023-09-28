@@ -27,7 +27,8 @@
     .left {
       display: flex;
       align-items: center;
-
+ 
+      
       img {
         height: 50px;
         margin-right: 40px;
@@ -36,26 +37,36 @@
           display: none;
         }
       }
-
+      
       span {
         margin-right: 20px;
         cursor: pointer;
       }
 
-      .searchContainer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border: 1px solid lightgray;
-        padding: 5px;
-        width: 500px;
+      // .custom-link {
+      //   text-decoration: none;
+      //   color: white;
+      //   transition: color 0.2s; /* Add a smooth color transition */
+      // }
+      
+      // .custom-link:hover {
+      //   color: red; /* Replace with your desired hover color */
+      // }
 
-        input {
-          border: none;
-          flex: 3;
-          padding: 5px;
-        }
-      }
+      // .searchContainer {
+      //   display: flex;
+      //   align-items: center;
+      //   justify-content: space-between;
+      //   border: 1px solid lightgray;
+      //   padding: 5px;
+      //   width: 500px;
+
+      //   input {
+      //     border: none;
+      //     flex: 3;
+      //     padding: 5px;
+      //   }
+      // }
     }
 
     .right {
