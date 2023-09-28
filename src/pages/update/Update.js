@@ -11,7 +11,6 @@ export default function Update() {
   const { user } = UserAuth();
   let navigate = useNavigate();
   const { id } = useParams();
-  const currentYear = new Date().getFullYear();
   // gerne option value here. You can add more option
   const options = [
     {

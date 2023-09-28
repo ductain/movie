@@ -1,40 +1,39 @@
 import "./featured.scss";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-export default function Featured() {
-  const [movies, setMovies] = useState([]);
+export default function Featured({movies}) {
+  // const [movies, setMovies] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
-  const fetchMovies = async () => {
-    try {
-      const response = await axios.get(
-        "https://64914d492f2c7ee6c2c7f847.mockapi.io/api/v1/Movies"
-      );
+  // const fetchMovies = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "https://64914d492f2c7ee6c2c7f847.mockapi.io/api/v1/Movies"
+  //     );
 
-      if (response.status === 200) {
-        const moviesData = response.data;
+  //     if (response.status === 200) {
+  //       const moviesData = response.data;
 
-        if (moviesData.length > 0) {
-          setMovies(moviesData);
-        } else {
-          console.log("No movies found in the data.");
-        }
-      } else {
-        console.log("Failed to fetch data. Status code: " + response.status);
-      }
-    } catch (error) {
-      console.log("An error occurred while fetching data:", error);
-    }
-  };
+  //       if (moviesData.length > 0) {
+  //         setMovies(moviesData);
+  //       } else {
+  //         console.log("No movies found in the data.");
+  //       }
+  //     } else {
+  //       console.log("Failed to fetch data. Status code: " + response.status);
+  //     }
+  //   } catch (error) {
+  //     console.log("An error occurred while fetching data:", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchMovies();
-  }, []);
+  // useEffect(() => {
+  //   fetchMovies();
+  // }, []);
 
   const sliderSettings = {
     dots: true,
@@ -50,7 +49,7 @@ export default function Featured() {
   return (
     <div className="featured">
       <Slider {...sliderSettings}>
-        {movies.map((movie, index) => (
+        {movies?.map((movie, index) => (
           <div key={movie.id} className="featured">
             <img src={movie.img} alt={`Featured movie ${index}`} />
             <div className="info">

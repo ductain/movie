@@ -43,7 +43,6 @@ export default function AddMovie() {
       value: "Comedy",
     },
   ];
-  const currentYear = new Date().getFullYear();
   const formik = useFormik({
     initialValues: {
       title: "",
