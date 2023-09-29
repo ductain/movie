@@ -55,7 +55,7 @@ const Navbar = () => {
             <>
               <Link
                 to={"/"}
-                className="custom-link"
+                className="custom"
                 // style={{
                 //   textDecoration: "none",
                 //   color: "white",
@@ -68,7 +68,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to={"/about"}
-                className="custom-about"
+                className="custom"
                 // style={{
                 //   textDecoration: "none",
                 //   color: "white",
@@ -82,7 +82,7 @@ const Navbar = () => {
               {user && (
                 <Link
                   to={"/favorites"}
-                  className="custom-favorite"
+                  className="custom"
                   // style={{
                   //   textDecoration: "none",
                   //   color: "white",
@@ -96,7 +96,7 @@ const Navbar = () => {
               )}
               <Link
                 to={"/upcoming"}
-                className="custom-upcoming"
+                className="custom"
                 // style={{
                 //   textDecoration: "none",
                 //   color: "white",
