@@ -1,0 +1,11 @@
+.random{
+  .detail{
+    z-index: 999;
+    background: linear-gradient(to bottom , transparent 0%, rgb(0, 0, 0, 1) 80%);
+  }
+  
+  .container-random{
+    background-color: var(--main-color);
+    overflow: hidden;
+  }
+}

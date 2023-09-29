@@ -2,13 +2,13 @@ import "./list.scss";
 import ListItem from "../listItem/ListItem";
 import { Grid } from "@mui/material";
 
-export default function List({ movies, search }) {
+export default function List({ movies, search, title }) {
   const filtered = movies.filter((movie) =>
     movie.title.toLowerCase().includes(search?.toLowerCase())
   );
   return (
     <div className="list">
-      <span className="listTitle">List of movies</span>
+      <span className="listTitle">{title}</span>
       <div className="container">
         <Grid container >
           {filtered.length > 0 ? (
