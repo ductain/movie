@@ -2,11 +2,9 @@ import "./navbar.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import logo from "../../assets/logo1-removebg-preview-2.png";
+import { Typography, Button, Menu, MenuItem } from "@mui/material";
 const Navbar = () => {
   const { user, logOut, googleSignIn } = UserAuth();
   const handleGoogleSignIn = async () => {
@@ -55,82 +53,27 @@ const Navbar = () => {
           )}
           {user?.uid !== "zSqtyhPsBuUPSCiCKVMDrBJgYhy2" ? (
             <>
-              <Link
-                to={"/"}
-                className="custom-link"
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  transition: "color 0.1s", // Add a smooth color transition
-                }}
-                onMouseEnter={(e) => (e.target.style.color = "red")}
-                onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
-              >
-                <span>Homepage</span>
+              <Link to={"/"}>
+                <Button className="red-hover">Homepage</Button>
               </Link>
-              <Link
-                to={"/about"}
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  transition: "color 0.1s", // Add a smooth color transition
-                }}
-                onMouseEnter={(e) => (e.target.style.color = "red")}
-                onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
-              >
-                <span>About</span>
+              <Link to={"/about"}>
+                <Button className="red-hover">About</Button>
               </Link>
               {user && (
-                <Link
-                  to={"/favorites"}
-                  style={{
-                    textDecoration: "none",
-                    color: "white",
-                    transition: "color 0.1s", // Add a smooth color transition
-                  }}
-                  onMouseEnter={(e) => (e.target.style.color = "red")}
-                  onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
-                >
-                  <span>Favorites</span>
+                <Link to={"/favorites"}>
+                  <Button className="red-hover">Favorites</Button>
                 </Link>
               )}
-              <Link
-                to={"/upcoming"}
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  transition: "color 0.1s", // Add a smooth color transition
-                }}
-                onMouseEnter={(e) => (e.target.style.color = "red")}
-                onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
-              >
-                <span>Upcoming</span>
+              <Link to={"/upcoming"}>
+                <Button className="red-hover">Upcoming</Button>
               </Link>
-              <Link
-                to={"/recommend"}
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  transition: "color 0.1s", // Add a smooth color transition
-                }}
-                onMouseEnter={(e) => (e.target.style.color = "red")}
-                onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
-              >
-                <span>Recommendation</span>
+              <Link to={"/recommend"}>
+                <Button className="red-hover">Recommendation</Button>
               </Link>
             </>
           ) : (
-            <Link
-              to={"/admin"}
-              style={{
-                textDecoration: "none",
-                color: "white",
-                transition: "color 0.1s", // Add a smooth color transition
-              }}
-              onMouseEnter={(e) => (e.target.style.color = "red")}
-              onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
-            >
-              <span>Admin</span>
+            <Link to={"/admin"}>
+              <Button className="red-hover">Admin</Button>
             </Link>
           )}
         </div>
@@ -138,7 +81,8 @@ const Navbar = () => {
           {user?.displayName ? (
             <>
               {/* <img src={user.photoURL} alt={user.email} /> */}
-              <span>{user.displayName}</span>
+
+              <Typography className="hidden">{user.displayName}</Typography>
               <div className="profile">
                 <IconButton
                   className="icon"

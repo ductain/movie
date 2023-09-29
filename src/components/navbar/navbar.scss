@@ -27,28 +27,27 @@
     .left {
       display: flex;
       align-items: center;
- 
-      
+
       img {
         height: 50px;
         margin-right: 40px;
 
-        @include mobile {
+        @include tablet {
           display: none;
         }
       }
+
       
-      span {
-        margin-right: 20px;
-        cursor: pointer;
+
+      .red-hover {
+        text-decoration: none;
+        color: white;
+        transition: color 0.1s;
+        &:hover {
+          color: red;
+        }
       }
 
-      // .custom-link {
-      //   text-decoration: none;
-      //   color: white;
-      //   transition: color 0.2s; /* Add a smooth color transition */
-      // }
-      
       // .custom-link:hover {
       //   color: red; /* Replace with your desired hover color */
       // }
@@ -68,7 +67,11 @@
       //   }
       // }
     }
-
+    .hidden {
+      @include tablet {
+        display: none;
+      }
+    }
     .right {
       display: flex;
       align-items: center;
@@ -86,18 +89,18 @@
         margin-right: 10px;
       }
 
-      span{
+      span {
         @include tablet {
           display: none;
         }
       }
 
       // &:hover {
-        .options {
-          display: flex;
-          flex-direction: column;
-          position: absolute;
-        }
+      .options {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+      }
       // }
 
       .profile {
@@ -122,5 +125,4 @@
       }
     }
   }
-  
 }
