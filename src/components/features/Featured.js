@@ -35,16 +35,16 @@ export default function Featured({ movies }) {
   //   fetchMovies();
   // }, []);
 
-  // const sliderSettings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   autoplay: true,
-  //   autoplaySpeed: 5000,
-  //   beforeChange: (current, next) => setCurrentSlideIndex(next),
-  // };
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    beforeChange: (current, next) => setCurrentSlideIndex(next),
+  };
 
   return (
     <div className="featured">
