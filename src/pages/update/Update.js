@@ -6,10 +6,11 @@ import * as Yup from "yup";
 import { TextField, Button, Typography } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Rating from "@mui/material/Rating";
+import { UserAuth } from "../../context/AuthContext";
 export default function Update() {
+  const { user } = UserAuth();
   let navigate = useNavigate();
   const { id } = useParams();
-  const currentYear = new Date().getFullYear();
   // gerne option value here. You can add more option
   const options = [
     {
@@ -77,8 +78,7 @@ export default function Update() {
       title: Yup.string()
         .required("Required")
         .min(2, "Must be 2 characters or more"),
-      date: Yup.string()
-        .required("Required."),
+      date: Yup.string().required("Required."),
       gerne: Yup.string().required("Required"),
       img: Yup.string()
         .required("Required")
@@ -92,116 +92,127 @@ export default function Update() {
     }),
   });
   return (
-    <form onSubmit={formik.handleSubmit} style={{ padding: "100px 50px" }}>
-      <h1 style={{ textAlign: "center" }}>Update movie</h1>
-      <TextField
-        autoFocus
-        margin="dense"
-        name="title"
-        label="Title"
-        type="text"
-        fullWidth
-        variant="standard"
-        value={formik.values.title}
-        onChange={formik.handleChange}
-      />
-      {formik.errors.title && (
-        <Typography variant="caption" color="red">
-          {formik.errors.title}
-        </Typography>
+    <>
+      {user?.uid === "zSqtyhPsBuUPSCiCKVMDrBJgYhy2" && (
+        <>
+          <form
+            onSubmit={formik.handleSubmit}
+            style={{ padding: "100px 50px" }}
+          >
+            <h1 style={{ textAlign: "center" }}>Update movie</h1>
+            <TextField
+              autoFocus
+              margin="dense"
+              name="title"
+              label="Title"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={formik.values.title}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.title && (
+              <Typography variant="caption" color="red">
+                {formik.errors.title}
+              </Typography>
+            )}
+            <TextField
+              margin="dense"
+              name="date"
+              label="Date"
+              type="date"
+              fullWidth
+              variant="standard"
+              value={formik.values.date}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.date && (
+              <Typography variant="caption" color="red">
+                {formik.errors.date}
+              </Typography>
+            )}
+            <TextField
+              margin="dense"
+              name="gerne"
+              label="Select A Gerne"
+              select
+              fullWidth
+              variant="standard"
+              value={formik.values.gerne}
+              onChange={formik.handleChange}
+            >
+              {options.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.value}
+                </MenuItem>
+              ))}
+            </TextField>
+            {formik.errors.gerne && formik.touched.gerne && (
+              <Typography variant="caption" color="red">
+                {formik.errors.gerne}
+              </Typography>
+            )}
+            <Typography component="legend" variant="caption">
+              Rating
+            </Typography>
+            <Rating
+              name="rating"
+              value={formik.values.rating}
+              onChange={formik.handleChange}
+              size="large"
+            />
+            <TextField
+              margin="dense"
+              name="img"
+              label="URL of image"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={formik.values.img}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.img && (
+              <Typography variant="caption" color="red">
+                {formik.errors.img}
+              </Typography>
+            )}
+            <TextField
+              margin="dense"
+              name="clip"
+              label="URL of clip"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={formik.values.clip}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.clip && (
+              <Typography variant="caption" color="red">
+                {formik.errors.clip}
+              </Typography>
+            )}
+            <TextField
+              margin="dense"
+              name="detail"
+              label="Detail"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={formik.values.detail}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.detail && (
+              <Typography variant="caption" color="red">
+                {formik.errors.detail}
+              </Typography>
+            )}
+            <br />
+            <Button variant="contained" color="success" type="submit">
+              Update
+            </Button>
+          </form>
+        </>
       )}
-      <TextField
-        margin="dense"
-        name="date"
-        label="Date"
-        type="date"
-        fullWidth
-        variant="standard"
-        value={formik.values.date}
-        onChange={formik.handleChange}
-      />
-      {formik.errors.date && (
-        <Typography variant="caption" color="red">
-          {formik.errors.date}
-        </Typography>
-      )}
-      <TextField
-        margin="dense"
-        name="gerne"
-        label="Select A Gerne"
-        select
-        fullWidth
-        variant="standard"
-        value={formik.values.gerne}
-        onChange={formik.handleChange}
-      >
-        {options.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.value}
-          </MenuItem>
-        ))}
-      </TextField>
-      {formik.errors.gerne && formik.touched.gerne && (
-        <Typography variant="caption" color="red">
-          {formik.errors.gerne}
-        </Typography>
-      )}
-      <Typography component="legend" variant="caption">Rating</Typography>
-      <Rating
-        name="rating"
-        value={formik.values.rating}
-        onChange={formik.handleChange}
-        size="large"
-      />
-      <TextField
-        margin="dense"
-        name="img"
-        label="URL of image"
-        type="text"
-        fullWidth
-        variant="standard"
-        value={formik.values.img}
-        onChange={formik.handleChange}
-      />
-      {formik.errors.img && (
-        <Typography variant="caption" color="red">
-          {formik.errors.img}
-        </Typography>
-      )}
-      <TextField
-        margin="dense"
-        name="clip"
-        label="URL of clip"
-        type="text"
-        fullWidth
-        variant="standard"
-        value={formik.values.clip}
-        onChange={formik.handleChange}
-      />
-      {formik.errors.clip && (
-        <Typography variant="caption" color="red">
-          {formik.errors.clip}
-        </Typography>
-      )}
-      <TextField
-        margin="dense"
-        name="detail"
-        label="Detail"
-        type="text"
-        fullWidth
-        variant="standard"
-        value={formik.values.detail}
-        onChange={formik.handleChange}
-      />
-      {formik.errors.detail && (
-        <Typography variant="caption" color="red">
-          {formik.errors.detail}
-        </Typography>
-      )}
-      <br />
-      <Button variant="contained" color="success" type="submit">
-        Update
-      </Button>
-    </form>
+    </>
   );
 }

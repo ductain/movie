@@ -9,7 +9,6 @@ import IconButton from "@mui/material/IconButton";
 import logo from "../../assets/logo1-removebg-preview-2.png";
 
 const Navbar = () => {
-
   const { user, logOut, googleSignIn } = UserAuth();
   const handleGoogleSignIn = async () => {
     try {
@@ -52,55 +51,61 @@ const Navbar = () => {
           <Link to={"/"}>
             <img src={logo} alt="Logo" />
           </Link>
-          <Link
-            to={"/"}
-            className="custom-link"
-            style={{
-              textDecoration: "none",
-              color: "white",
-              transition: "color 0.1s", // Add a smooth color transition
-            }}
-            onMouseEnter={(e) => (e.target.style.color = "red")}
-            onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
-          >
-            <span>Homepage</span>
-          </Link>
-          <Link
-            to={"/about"}
-            style={{
-              textDecoration: "none",
-              color: "white",
-              transition: "color 0.1s", // Add a smooth color transition
-            }}
-            onMouseEnter={(e) => (e.target.style.color = "red")}
-            onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
-          >
-            <span>About</span>
-          </Link>
-          <Link
-            to={"/favorites"}
-            style={{
-              textDecoration: "none",
-              color: "white",
-              transition: "color 0.1s", // Add a smooth color transition
-            }}
-            onMouseEnter={(e) => (e.target.style.color = "red")}
-            onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
-          >
-            <span>Favorites</span>
-          </Link>
-          <Link
-            to={"/upcoming"}
-            style={{
-              textDecoration: "none",
-              color: "white",
-              transition: "color 0.1s", // Add a smooth color transition
-            }}
-            onMouseEnter={(e) => (e.target.style.color = "red")}
-            onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
-          >
-            <span>Upcoming</span>
-          </Link>
+          {user?.uid !== "zSqtyhPsBuUPSCiCKVMDrBJgYhy2" && (
+            <>
+              <Link
+                to={"/"}
+                className="custom-link"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  transition: "color 0.1s", // Add a smooth color transition
+                }}
+                onMouseEnter={(e) => (e.target.style.color = "red")}
+                onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
+              >
+                <span>Homepage</span>
+              </Link>
+              <Link
+                to={"/about"}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  transition: "color 0.1s", // Add a smooth color transition
+                }}
+                onMouseEnter={(e) => (e.target.style.color = "red")}
+                onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
+              >
+                <span>About</span>
+              </Link>
+              {user && (
+                <Link
+                  to={"/favorites"}
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                    transition: "color 0.1s", // Add a smooth color transition
+                  }}
+                  onMouseEnter={(e) => (e.target.style.color = "red")}
+                  onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
+                >
+                  <span>Favorites</span>
+                </Link>
+              )}
+              <Link
+                to={"/upcoming"}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  transition: "color 0.1s", // Add a smooth color transition
+                }}
+                onMouseEnter={(e) => (e.target.style.color = "red")}
+                onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
+              >
+                <span>Upcoming</span>
+              </Link>
+            </>
+          )}
         </div>
         <div className="right">
           {user?.displayName ? (

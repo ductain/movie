@@ -11,7 +11,9 @@ import { format } from "date-fns";
 import { IconButton, Typography, Chip, Box, Grid, Button } from "@mui/material";
 import CustomAlert from "../../components/snackbar/alert";
 import Tooltip from "@mui/material/Tooltip";
+
 import RandomMovieList from "./RandomMovieList";
+import { UserAuth } from "../../context/AuthContext"
 
 export default function Detail() {
   const { id } = useParams();
@@ -78,7 +80,7 @@ export default function Detail() {
   };
 
   const publishDate = new Date(content.date);
-
+  const { user } = UserAuth();
   return (
     // <Grid container className="container-detail">
     <div className="bg-img">
@@ -157,6 +159,7 @@ export default function Detail() {
                   </Link>
                 </Box>
               </Box>
+
             </Box>
           </Box>
         </Box>

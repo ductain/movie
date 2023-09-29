@@ -30,8 +30,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="feature">
-        <Featured />
-        {/* <span>sadasdasdsad</span> */}
+        <Featured movies={movies}/> {/*set props movie for featured*/}
       </div>
       <div className="container">
         <Search setSearchValue={setSearchValue} movies={movies} />
