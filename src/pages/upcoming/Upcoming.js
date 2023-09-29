@@ -31,7 +31,7 @@ export default function Upcoming() {
             <Grid container>
               {movies.map((movie) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-                  <Link to={`/upcomingDetail/${movie.id}`}>
+                  <Link to={`/detail/${movie.id}`}>
                     <div className="listItem">
                       <img src={movie.img} alt="" />
                       <div className="info">

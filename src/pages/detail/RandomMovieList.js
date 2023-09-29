@@ -64,7 +64,7 @@ const RandomMovieList = () => {
     return (
       <div className="random">
         <div className="container-random">          
-          <List movies={movies} search={searchValue} />
+          <List movies={movies} search={searchValue} title='You may want to watch'/>
         </div>
       </div>
     );

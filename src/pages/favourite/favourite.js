@@ -27,7 +27,7 @@ const Favorites = () => {
   return (
     <div className="favorites-container"> 
       <div className="favorites-content">
-        <List movies={filteredMovies} search={searchValue} />
+        <List movies={filteredMovies} search={searchValue} title='My Favorites'/>
       </div>
     </div>
   );

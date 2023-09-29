@@ -87,26 +87,24 @@ export default function Detail() {
       <div className="detail-container">
         {/* <div className="overlay1"> */}
         <Box className="overlay1">
-          <Box className="detail" style={{ border: "2px solid #f5f5f5" }}>
-            <Box className="data-box"   style={{ border: "2px solid #f5f5f5" }}>
+          <Box className="detail">
+            <Box className="data-box">
               <Box
                 className="img-wrapper"
-                style={{ border: "2px solid #f5f5f5" }}
               >
                 <img src={content.img} alt="movie poster" />
               </Box>
               <Box
                 sx={{ color: "white" }}
-                style={{ border: "2px solid #f5f5f5" }}
                 className="data-wrapper"
               >
-                <Typography variant="h4">{content.title}</Typography>
+                <Typography variant="h4" className="movieTitle">{content.title}</Typography>
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    // border: "2px solid #f5f5f5",
                   }}
+                  className = 'rating-date'
                 >
                   <Typography variant="h6">Rating:</Typography>
                   <Rating name="read-only" value={content.rating} readOnly />

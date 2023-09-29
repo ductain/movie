@@ -4,6 +4,7 @@ import Featured from "../../components/features/Featured";
 import List from "../../components/list/List";
 import "./home.scss";
 import Search from "../../components/search/Search";
+import Footer from "../../components/footer/Footer";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -34,7 +35,10 @@ const Home = () => {
       </div>
       <div className="container">
         <Search setSearchValue={setSearchValue} movies={movies} />
-        <List movies={movies} search={searchValue} />
+        <List movies={movies} search={searchValue} title='Featuring'/>
+      </div>
+      <div className="footer">
+        <Footer />
       </div>
     </div>
   );
