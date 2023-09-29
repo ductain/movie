@@ -14,49 +14,56 @@ const Footer = () => {
       sx={{
         backgroundColor: "#202020",
         color: "#f5f5f5",
-        padding: "50px 100px",
+        padding: "50px 10%",
       }}
     >
       <Grid container spacing={3}>
-        <Grid container >
-            <Grid item xs={12}>
-
+        <Grid item xs={12} sm={6} md={3}>
+          {/* Section 1 */}
+          <Typography variant="h6" gutterBottom>
+            About Us
+          </Typography>
+          <Typography variant="body2">
+            We are a leading company in the industry, providing innovative solutions to our customers.
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          {/* Section 2 */}
+          <Typography variant="h6" gutterBottom>
+            Contact Us
+          </Typography>
+          <Typography variant="body2">
+            Phone: 123-456-7890<br />
+            Email: info@example.com
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          {/* Section 3 */}
+          <Typography variant="h6" gutterBottom>
+            Links
+          </Typography>
+          <Typography variant="body2">
+            <ul className="itemList">
+              <li>Home</li>
+              <li>About</li>
+              <li>Products</li>
+              <li>Contact</li>
+            </ul>
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          {/* Social Media Icons */}
           <Stack
             direction="row"
             spacing={2}
             sx={{ paddingBottom: 2, fontSize: "24px" }}
             className="stack"
-            >
+          >
             <FacebookIcon />
             <InstagramIcon />
             <TwitterIcon />
             <YouTubeIcon />
           </Stack>
-              </Grid>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Typography variant="h6" gutterBottom>
-            Section 1
-          </Typography>
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Typography variant="h6" gutterBottom>
-            Section 2
-          </Typography>
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Typography variant="h6" gutterBottom>
-            Section 3
-          </Typography>
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </Typography>
         </Grid>
       </Grid>
     </Box>
