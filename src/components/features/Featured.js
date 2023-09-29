@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-export default function Featured({movies}) {
+export default function Featured({ movies }) {
   // const [movies, setMovies] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
@@ -35,16 +35,16 @@ export default function Featured({movies}) {
   //   fetchMovies();
   // }, []);
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    beforeChange: (current, next) => setCurrentSlideIndex(next),
-  };
+  // const sliderSettings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   autoplay: true,
+  //   autoplaySpeed: 5000,
+  //   beforeChange: (current, next) => setCurrentSlideIndex(next),
+  // };
 
   return (
     <div className="featured">
@@ -54,10 +54,20 @@ export default function Featured({movies}) {
             <img src={movie.img} alt={`Featured movie ${index}`} />
             <div className="info">
               <h1>{movie.title}</h1>
-              <span>{new Date(movie.date).getFullYear()}</span> {/*get year from date*/}
+              <span>{new Date(movie.date).getFullYear()}</span>{" "}
+              {/*get year from date*/}
               <span className="desc">{movie.detail}</span>
               <div className="buttons">
-                <Link to={`/watch/${movie.id}`} style={{ textDecoration: "none" }}>
+                <Link
+                  to={`/watch/${movie.id}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    transition: "color 0.1s", // Add a smooth color transition
+                  }}
+                  onMouseEnter={(e) => (e.target.style.color = "red")}
+                  onMouseLeave={(e) => (e.target.style.color = "black")} // Reset to the original color on mouse leave
+                >
                   <button className="play">
                     <PlayArrowIcon />
                     <span>Play</span>

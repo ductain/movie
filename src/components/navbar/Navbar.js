@@ -56,51 +56,54 @@ const Navbar = () => {
               <Link
                 to={"/"}
                 className="custom-link"
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  transition: "color 0.1s", // Add a smooth color transition
-                }}
-                onMouseEnter={(e) => (e.target.style.color = "red")}
-                onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
+                // style={{
+                //   textDecoration: "none",
+                //   color: "white",
+                //   transition: "color 0.5s", // Add a smooth color transition
+                // }}
+                // onMouseEnter={(e) => (e.target.style.color = "red")}
+                // onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
               >
                 <span>Homepage</span>
               </Link>
               <Link
                 to={"/about"}
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  transition: "color 0.1s", // Add a smooth color transition
-                }}
-                onMouseEnter={(e) => (e.target.style.color = "red")}
-                onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
+                className="custom-about"
+                // style={{
+                //   textDecoration: "none",
+                //   color: "white",
+                //   transition: "color 0.5s", // Add a smooth color transition
+                // }}
+                // onMouseEnter={(e) => (e.target.style.color = "red")}
+                // onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
               >
                 <span>About</span>
               </Link>
               {user && (
                 <Link
                   to={"/favorites"}
-                  style={{
-                    textDecoration: "none",
-                    color: "white",
-                    transition: "color 0.1s", // Add a smooth color transition
-                  }}
-                  onMouseEnter={(e) => (e.target.style.color = "red")}
-                  onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
+                  className="custom-favorite"
+                  // style={{
+                  //   textDecoration: "none",
+                  //   color: "white",
+                  //   transition: "color 0.5s", // Add a smooth color transition
+                  // }}
+                  // onMouseEnter={(e) => (e.target.style.color = "red")}
+                  // onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
                 >
                   <span>Favorites</span>
                 </Link>
               )}
               <Link
                 to={"/upcoming"}
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  transition: "color 0.1s", // Add a smooth color transition
-                }}
-                onMouseEnter={(e) => (e.target.style.color = "red")}
-                onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
+                className="custom-upcoming"
+                // style={{
+                //   textDecoration: "none",
+                //   color: "white",
+                //   transition: "color 1s ease-in", // Add a smooth color transition
+                // }}
+                // onMouseEnter={(e) => (e.target.style.color = "red")}
+                // onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
               >
                 <span>Upcoming</span>
               </Link>
@@ -161,6 +164,13 @@ const Navbar = () => {
             <Button
               onClick={handleGoogleSignIn}
               sx={{ my: 2, color: "white", display: "block" }}
+              style={{
+                textDecoration: "none",
+                color: "white",
+                transition: "color 0.5s", // Add a smooth color transition
+              }}
+              onMouseEnter={(e) => (e.target.style.color = "red")}
+              onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
             >
               Sign in
             </Button>
