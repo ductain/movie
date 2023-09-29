@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-import "./upcoming.scss";
 import axios from "axios";
 import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-export default function Upcoming() {
-  const [movies, setMovies] = useState([]);
+
+export default function Recommendation() {
+    const [movies, setMovies] = useState([]);
   useEffect(() => {
     try {
       const getMovies = async () => {
-        const currentDate = new Date();
         const res = await axios.get(
           "https://64914d492f2c7ee6c2c7f847.mockapi.io/api/v1/Movies"
         );
         const filteredMovies = res.data.filter(
-          (movie) => new Date(movie.date) > currentDate
+          (movie) => movie.rating == 5
         );
         setMovies(filteredMovies);
       };
@@ -26,7 +25,7 @@ export default function Upcoming() {
     <div className="upcomingContainer">
       <div className="upcomingContent">
         <div className="list">
-          <span className="listTitle">Upcoming movies</span>
+          <span className="listTitle">Recommend movies</span>
           <div className="container">
             <Grid container>
               {movies.map((movie) => (
@@ -50,5 +49,5 @@ export default function Upcoming() {
         </div>
       </div>
     </div>
-  );
+  )
 }

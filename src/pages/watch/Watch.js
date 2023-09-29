@@ -18,7 +18,7 @@ export default function Watch() {
     } catch (error) {
       console.log(error)
     }
-  }, [])
+  }, [id])
   return (
     <div className='watch-responsive'>
       <iframe

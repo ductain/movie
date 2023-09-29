@@ -12,17 +12,28 @@ import Update from "./pages/update/Update";
 import Account from "./pages/account/Account";
 import Favorites from "./pages/favourite/favourite";
 import Upcoming from "./pages/upcoming/Upcoming";
+import { UserAuth } from "./context/AuthContext";
+import Recommendation from "./pages/recommendation/Recommendation";
 const App = () => {
+  const { user } = UserAuth();
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/upcoming" element={<Upcoming />} />
+        <Route path="/recommend" element={<Recommendation />} />
         <Route path="/about" element={<About />} />
         <Route path="/watch/:id" element={<Watch />} />
         <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/favorites" element={<Favorites/>}/>
+        <Route
+          path="/favorites"
+          element={
+            <Protected>
+              <Favorites />
+            </Protected>
+          }
+        />
         <Route
           path="/admin"
           element={

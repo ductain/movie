@@ -7,7 +7,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import logo from "../../assets/logo1-removebg-preview-2.png";
-
 const Navbar = () => {
   const { user, logOut, googleSignIn } = UserAuth();
   const handleGoogleSignIn = async () => {
@@ -43,15 +42,18 @@ const Navbar = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-
   return (
     <div className={isScrolled ? "navbar scrolled" : "navbar"}>
       <div className="container">
         <div className="left">
-          <Link to={"/"}>
+          {user?.uid !== "zSqtyhPsBuUPSCiCKVMDrBJgYhy2" ? (
+            <Link to={"/"}>
+              <img src={logo} alt="Logo" />
+            </Link>
+          ) : (
             <img src={logo} alt="Logo" />
-          </Link>
-          {user?.uid !== "zSqtyhPsBuUPSCiCKVMDrBJgYhy2" && (
+          )}
+          {user?.uid !== "zSqtyhPsBuUPSCiCKVMDrBJgYhy2" ? (
             <>
               <Link
                 to={"/"}
@@ -104,7 +106,32 @@ const Navbar = () => {
               >
                 <span>Upcoming</span>
               </Link>
+              <Link
+                to={"/recommend"}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  transition: "color 0.1s", // Add a smooth color transition
+                }}
+                onMouseEnter={(e) => (e.target.style.color = "red")}
+                onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
+              >
+                <span>Recommendation</span>
+              </Link>
             </>
+          ) : (
+            <Link
+              to={"/admin"}
+              style={{
+                textDecoration: "none",
+                color: "white",
+                transition: "color 0.1s", // Add a smooth color transition
+              }}
+              onMouseEnter={(e) => (e.target.style.color = "red")}
+              onMouseLeave={(e) => (e.target.style.color = "white")} // Reset to the original color on mouse leave
+            >
+              <span>Admin</span>
+            </Link>
           )}
         </div>
         <div className="right">

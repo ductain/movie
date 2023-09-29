@@ -13,7 +13,7 @@ import CustomAlert from "../../components/snackbar/alert";
 import Tooltip from "@mui/material/Tooltip";
 
 import RandomMovieList from "./RandomMovieList";
-import { UserAuth } from "../../context/AuthContext"
+import { UserAuth } from "../../context/AuthContext";
 
 export default function Detail() {
   const { id } = useParams();
@@ -49,20 +49,20 @@ export default function Detail() {
 
   const handleToggleStatus = async () => {
     try {
-      const newStatus = content.status === 0 ? 1 : 0;
+      const newFavorite = content.favorite === 0 ? 1 : 0;
       await axios.put(
         `https://64914d492f2c7ee6c2c7f847.mockapi.io/api/v1/Movies/${id}`,
         {
-          status: newStatus,
+          favorite: newFavorite,
         }
       );
 
       setContent((prevContent) => ({
         ...prevContent,
-        status: newStatus,
+        favorite: newFavorite,
       }));
 
-      if (newStatus === 1) {
+      if (newFavorite === 1) {
         setSnackbarMessage("Added to favorites!");
         setSnackbarVariant("success");
       } else {
@@ -91,22 +91,19 @@ export default function Detail() {
         <Box className="overlay1">
           <Box className="detail">
             <Box className="data-box">
-              <Box
-                className="img-wrapper"
-              >
+              <Box className="img-wrapper">
                 <img src={content.img} alt="movie poster" />
               </Box>
-              <Box
-                sx={{ color: "white" }}
-                className="data-wrapper"
-              >
-                <Typography variant="h4" className="movieTitle">{content.title}</Typography>
+              <Box sx={{ color: "white" }} className="data-wrapper">
+                <Typography variant="h4" className="movieTitle">
+                  {content.title}
+                </Typography>
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "row",
                   }}
-                  className = 'rating-date'
+                  className="rating-date"
                 >
                   <Typography variant="h6">Rating:</Typography>
                   <Rating name="read-only" value={content.rating} readOnly />
@@ -126,27 +123,29 @@ export default function Detail() {
                     padding: "30px 0px",
                   }}
                 >
-                  <Tooltip
-                    title={
-                      content.status === 0
-                        ? "Add to Favorites"
-                        : "Remove from Favorites"
-                    }
-                  >
-                    <Button
-                      onClick={handleToggleStatus}
-                      color="inherit"
-                      variant="outlined"
-                      size="large"
-                      sx={{ marginRight: "16px" }} // Add right margin to this button
+                  {user && (
+                    <Tooltip
+                      title={
+                        content.favorite === 0
+                          ? "Add to Favorites"
+                          : "Remove from Favorites"
+                      }
                     >
-                      {content.status === 0 ? (
-                        <FavoriteBorderIcon fontSize="medium" />
-                      ) : (
-                        <FavoriteIcon fontSize="medium" />
-                      )}
-                    </Button>
-                  </Tooltip>
+                      <Button
+                        onClick={handleToggleStatus}
+                        color="inherit"
+                        variant="outlined"
+                        size="large"
+                        sx={{ marginRight: "16px" }} // Add right margin to this button
+                      >
+                        {content.favorite === 0 ? (
+                          <FavoriteBorderIcon fontSize="medium" />
+                        ) : (
+                          <FavoriteIcon fontSize="medium" />
+                        )}
+                      </Button>
+                    </Tooltip>
+                  )}
                   <Link to={`/watch/${content.id}`}>
                     <Button
                       variant="contained"
@@ -159,7 +158,6 @@ export default function Detail() {
                   </Link>
                 </Box>
               </Box>
-
             </Box>
           </Box>
         </Box>

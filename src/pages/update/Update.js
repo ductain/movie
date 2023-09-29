@@ -28,6 +28,34 @@ export default function Update() {
     {
       value: "Comedy",
     },
+    {
+      value: "Thriller",
+    },
+    {
+      value: "Drama",
+    },
+    {
+      value: "Romance",
+    },
+    {
+      value: "Sci-fi",
+    },
+    {
+      value: "Fantasy",
+    },
+    {
+      value: "Adventure",
+    },
+  ];
+  const statusOps = [
+    {
+      label: "Available",
+      value: 0,
+    },
+    {
+      label: "Not Available",
+      value: 2,
+    },
   ];
   const [movie, setMovie] = useState({
     title: "",
@@ -37,6 +65,7 @@ export default function Update() {
     img: "",
     clip: "",
     detail: "",
+    status: 0,
   });
   useEffect(() => {
     try {
@@ -89,6 +118,7 @@ export default function Update() {
       detail: Yup.string()
         .required("Required")
         .min(10, "Must be 10 characters or more"),
+      status: Yup.string().required("Required"),
     }),
   });
   return (
@@ -204,6 +234,26 @@ export default function Update() {
             {formik.errors.detail && (
               <Typography variant="caption" color="red">
                 {formik.errors.detail}
+              </Typography>
+            )}
+            <TextField
+              margin="dense"
+              name="status"
+              select
+              fullWidth
+              variant="standard"
+              value={formik.values.status}
+              onChange={formik.handleChange}
+            >
+              {statusOps.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            {formik.errors.status && formik.touched.status && (
+              <Typography variant="caption" color="red">
+                {formik.errors.status}
               </Typography>
             )}
             <br />

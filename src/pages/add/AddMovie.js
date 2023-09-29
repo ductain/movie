@@ -42,6 +42,24 @@ export default function AddMovie() {
     {
       value: "Comedy",
     },
+    {
+      value: "Thriller",
+    },
+    {
+      value: "Drama",
+    },
+    {
+      value: "Romance",
+    },
+    {
+      value: "Sci-fi",
+    },
+    {
+      value: "Fantasy",
+    },
+    {
+      value: "Adventure",
+    },
   ];
   const formik = useFormik({
     initialValues: {
@@ -53,6 +71,7 @@ export default function AddMovie() {
       clip: "",
       detail: "",
       status: 0,
+      favorite: 0
     },
     onSubmit: (values) => {
       try {

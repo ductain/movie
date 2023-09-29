@@ -22,7 +22,7 @@ const Favorites = () => {
   }, []);
 
   // Filter movies with status 1
-  const filteredMovies = movies.filter((movie) => movie.status === 1);
+  const filteredMovies = movies.filter((movie) => movie.favorite === 1);
 
   return (
     <div className="favorites-container"> 
