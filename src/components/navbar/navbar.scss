@@ -42,44 +42,17 @@
         cursor: pointer;
       }
 
-      .custom-link {
-        text-decoration: none;
-        color: white;
-        transition: color 0.2s; /* Add a smooth color transition */
-      }
-
-      .custom-link:hover {
-        color: red; /* Replace with your desired hover color */
-      }
-
-      .custom-about {
-        text-decoration: none;
-        color: white;
-        transition: color 0.2s; /* Add a smooth color transition */
-      }
-
-      .custom-about:hover {
-        color: red; /* Replace with your desired hover color */
-      }
-
-      .custom-favorite {
-        text-decoration: none;
-        color: white;
-        transition: color 0.2s; /* Add a smooth color transition */
-      }
-
-      .custom-favorite:hover {
-        color: red; /* Replace with your desired hover color */
-      }
-
+      .custom-link,
+      .custom-about,
+      .custom-favorite,
       .custom-upcoming {
         text-decoration: none;
         color: white;
-        transition: color 0.2s; /* Add a smooth color transition */
-      }
+        transition: color 0.2s;
 
-      .custom-upcoming:hover {
-        color: red; /* Replace with your desired hover color */
+        &:hover {
+          color: red;
+        }
       }
 
       // .searchContainer {
