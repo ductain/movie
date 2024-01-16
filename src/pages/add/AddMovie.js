@@ -108,7 +108,7 @@ export default function AddMovie() {
             onSubmit={formik.handleSubmit}
             style={{ padding: "100px 50px" }}
           >
-            <h1 style={{ textAlign: "center" }}>Add a new movie</h1>
+            <h1 style={{ textAlign: "center" }}>Add a movie</h1>
             <TextField
               autoFocus
               margin="dense"
